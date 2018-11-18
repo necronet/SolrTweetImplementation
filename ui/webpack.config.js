@@ -51,10 +51,26 @@ module.exports = {
           loader: "less-loader"
         }
       ]
-    }  
+    }
     ]
     },
   resolve: {
     extensions: ['.js', '.jsx'],
+  },
+
+  devServer: {
+    port: 8888,
+    proxy: {
+      '/search': {
+         target: {
+            host: "0.0.0.0",
+            protocol: 'http:',
+            port: 8983
+         },
+         pathRewrite: {
+            '^/search': ''
+         }
+      }
+   }
   },
 };
