@@ -1187,7 +1187,7 @@
     <field name="tweet_date" type="pdate"/>
     <field name="tweet_lang" type="strings"/>
     <field name="tweet_loc" type="location"/>
-    <field name="tweet_text" type="strings"/>
+    <field name="tweet_text" type="text_general"/>
     <field name="hashtags" type="string"/>
     <field name="tweet_urls" type="strings"/>
     <field name="mentions" type="strings"/>
@@ -1199,6 +1199,12 @@
     <field name="text_th" type="tweet_th" />
     <field name="text_hi" type="tweet_hi" />
     <field name="text_fr" type="tweet_fr" />
+
+    <similarity class="solr.BM25SimilarityFactory">
+      <str name="k1">0.4</str>
+      <str name="b">0.8</str>
+    </similarity>
+
     <!-- Similarity is the scoring routine for each document vs. a query.
        A custom Similarity or SimilarityFactory may be specified here, but
        the default is fine for most applications.

@@ -1164,7 +1164,7 @@
   <updateRequestProcessorChain name="add-unknown-fields-to-the-schema"
     default="${update.autoCreateFields:false}">
     <!-- UUIDUpdateProcessorFactory will generate an id if none is present in the incoming document -->
-    <processor class="solr.UUIDUpdateProcessorFactory" />
+    <!-- <processor class="solr.UUIDUpdateProcessorFactory" /> -->
     <processor class="solr.RemoveBlankFieldUpdateProcessorFactory"/>
     <processor class="solr.FieldNameMutatingUpdateProcessorFactory">
       <str name="pattern">[^\w-\.]</str>
@@ -1227,6 +1227,14 @@
       </lst>
     </processor>
 
+    <processor class="solr.processor.SignatureUpdateProcessorFactory">
+      <bool name="enabled">true</bool>
+      <str name="signatureField">id</str>
+      <bool name="overwriteDupes">false</bool>
+      <str name="fields">tweet_text,tweet_urls,city,tweet_lang</str>
+      <str name="signatureClass">solr.processor.Lookup3Signature</str>
+    </processor>
+
     <processor class="solr.LogUpdateProcessorFactory"/>
     <processor class="solr.DistributedUpdateProcessorFactory"/>
     <processor class="solr.RunUpdateProcessorFactory"/>
@@ -1241,19 +1249,17 @@
        uniqueness based on that anyway.
 
     -->
-  <!--
-     <updateRequestProcessorChain name="dedupe">
-       <processor class="solr.processor.SignatureUpdateProcessorFactory">
-         <bool name="enabled">true</bool>
-         <str name="signatureField">id</str>
-         <bool name="overwriteDupes">false</bool>
-         <str name="fields">name,features,cat</str>
-         <str name="signatureClass">solr.processor.Lookup3Signature</str>
-       </processor>
-       <processor class="solr.LogUpdateProcessorFactory" />
-       <processor class="solr.RunUpdateProcessorFactory" />
-     </updateRequestProcessorChain>
-    -->
+    <!-- <updateRequestProcessorChain name="dedupe">
+      <processor class="solr.processor.SignatureUpdateProcessorFactory">
+        <bool name="enabled">true</bool>
+        <str name="signatureField">id</str>
+        <bool name="overwriteDupes">false</bool>
+        <str name="fields">tweet_text</str>
+        <str name="signatureClass">solr.processor.Lookup3Signature</str>
+      </processor>
+      <processor class="solr.LogUpdateProcessorFactory" />
+      <processor class="solr.RunUpdateProcessorFactory" />
+    </updateRequestProcessorChain> -->
 
   <!-- Language identification
 
