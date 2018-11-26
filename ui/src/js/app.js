@@ -22,7 +22,7 @@ export default class App extends Component {
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-      fetchData();
+      this.fetchData();
     }
 
   }
@@ -43,7 +43,7 @@ export default class App extends Component {
         Application boilerplate for Solr search
         <input type="text" name="search"
         value={this.state.search}
-        onKeyPress={this.handleKeyPress}
+        onKeyPress={this.handleKeyPress.bind(this)}
         onChange={(e)=>this.setState({ search: e.target.value })}
         placeholder={this.selectPlaceholder()}/>
         <ResultList results={this.state.results} />
