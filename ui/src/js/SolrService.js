@@ -3,17 +3,18 @@ import { SOLR_SERVER } from './constants'
 
 class SolrService {
 
-  constructor() {
+  constructor(itemPerPage) {
     this.config = {
         headers: {crossDomain: true},
-        params:{wt:"json"}
+        params:{wt:"json",rows:itemPerPage}
     };
   }
 
-  query(search,successFn) {
+  query(search, start, successFn) {
 
     if(search){
       this.config.params.q=search;
+      this.config.params.start=(start*this.config.params.rows);
       axios.get(SOLR_SERVER,this.config)
       .then(successFn)
     } else {

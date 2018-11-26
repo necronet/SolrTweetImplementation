@@ -11,17 +11,16 @@ export default class App extends Component {
   constructor() {
     super()
     this.state = { results:[], search:'mexico', activePage: 1, numFound:0}
-
-    this.solrService = new SolrService();
+    this.itemsPerPage = 10;
+    this.solrService = new SolrService(this.itemsPerPage);
   }
 
   componentWillMount() {
     this.fetchData();
   }
 
-  fetchData() {
-    this.solrService.query(this.state.search, (res)=>{
-
+  fetchData(start=0) {
+    this.solrService.query(this.state.search, start, (res)=>{
       this.setState({results:res.data.response.docs, numFound:res.data.response.numFound})
       }
     );
@@ -46,13 +45,14 @@ export default class App extends Component {
   }
 
   handlePageChange(pageNumber) {
-    this.setState({activePage: pageNumber});
+    //pageNumber-1 in order to have the right start for search
+    this.setState({activePage: pageNumber},()=>this.fetchData(pageNumber-1));
   }
 
   render() {
     return (
       <div className={style.header}>
-        
+
         <input type="text" name="search"
         value={this.state.search}
         onKeyPress={this.handleKeyPress.bind(this)}
@@ -62,9 +62,9 @@ export default class App extends Component {
         <Pagination itemClass="page-item"
                 linkClass="page-link"
                 activePage={this.state.activePage}
-                itemsCountPerPage={10}
+                itemsCountPerPage={this.itemsPerPage}
                 totalItemsCount={this.state.numFound}
-                pageRangeDisplayed={5}
+                pageRangeDisplayed={7}
                 onChange={this.handlePageChange.bind(this)}
                />
       </div>
