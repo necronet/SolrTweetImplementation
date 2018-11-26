@@ -52,7 +52,7 @@ export default class App extends Component {
   render() {
     return (
       <div className={style.header}>
-        Application boilerplate for Solr search
+        
         <input type="text" name="search"
         value={this.state.search}
         onKeyPress={this.handleKeyPress.bind(this)}
