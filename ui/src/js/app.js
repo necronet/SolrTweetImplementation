@@ -1,20 +1,15 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import style from "./App.less";
-import axios from 'axios';
+import SolrService from './SolrService'
 import ResultList from './ResultList'
-
-// Constants
-const SOLR_SERVER="http://localhost:8888/search/solr/tweets/select?q=mexico&wt=json"
-var config = {
-    headers: {'crossDomain': true}
-};
 
 export default class App extends Component {
 
   constructor() {
     super()
-    this.state = { results:[] }
+    this.state = { results:[], search:'mexico'}
+    this.solrService = new SolrService();
   }
 
   componentWillMount() {
@@ -22,26 +17,35 @@ export default class App extends Component {
   }
 
   fetchData() {
-    axios.get(SOLR_SERVER,config)
-    .then(res => {
-      //console.log(res.data.response);
-      this.setState({results:res.data.response.docs});
-    })
+    this.solrService.query(this.state.search, (res)=>this.setState({results:res.data.response.docs}) );
   }
 
   handleKeyPress(e) {
     if (e.key === 'Enter') {
-      console.log("Searching on " + SOLR_SERVER);
       fetchData();
     }
 
+  }
+
+  selectPlaceholder() {
+    const hints = ["(i.e NYC criminal activity)",
+                      "(i.e Bangladesh environmental problem)",
+                      "(i.e Paris bridges and road condition)",
+                      "(i.e Mexico rios and protest)",
+                      "(i.e Bangladesh environmental problem)"];
+
+    return "Topic search " + hints[Math.floor(Math.random() * hints.length)];
   }
 
   render() {
     return (
       <div className={style.header}>
         Application boilerplate for Solr search
-        <input type="text" name="search" onKeyPress={this.handleKeyPress} />
+        <input type="text" name="search"
+        value={this.state.search}
+        onKeyPress={this.handleKeyPress}
+        onChange={(e)=>this.setState({ search: e.target.value })}
+        placeholder={this.selectPlaceholder()}/>
         <ResultList results={this.state.results} />
       </div>
     );
