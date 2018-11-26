@@ -51,23 +51,35 @@ export default class App extends Component {
 
   render() {
     return (
-      <div className={style.header}>
+      <div className="container">
+        <div className="jumbotron">
+            <input type="text"
+            className="form-control"
+            name="search"
+            value={this.state.search}
+            onKeyPress={this.handleKeyPress.bind(this)}
+            onChange={(e)=>this.setState({ search: e.target.value })}
+            placeholder={this.selectPlaceholder()}/>
+            <ResultList results={this.state.results} />
+            <Pagination itemClass="page-item"
+                    linkClass="page-link"
+                    activePage={this.state.activePage}
+                    itemsCountPerPage={this.itemsPerPage}
+                    totalItemsCount={this.state.numFound}
+                    pageRangeDisplayed={7}
+                    onChange={this.handlePageChange.bind(this)}
+                   />
+          </div>
+          <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
+            <a className="navbar-brand" href="#">InfRet</a>
+            <ul className="navbar-nav mr-auto">
+            <li className="nav-item active">
+              <a className="nav-link" href="#">About</a>
+            </li>
+            </ul>
+          </nav>
+        </div>
 
-        <input type="text" name="search"
-        value={this.state.search}
-        onKeyPress={this.handleKeyPress.bind(this)}
-        onChange={(e)=>this.setState({ search: e.target.value })}
-        placeholder={this.selectPlaceholder()}/>
-        <ResultList results={this.state.results} />
-        <Pagination itemClass="page-item"
-                linkClass="page-link"
-                activePage={this.state.activePage}
-                itemsCountPerPage={this.itemsPerPage}
-                totalItemsCount={this.state.numFound}
-                pageRangeDisplayed={7}
-                onChange={this.handlePageChange.bind(this)}
-               />
-      </div>
     );
   }
 }
