@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+
 /*
 Example of tweet object
 city: ["mexico city"]
