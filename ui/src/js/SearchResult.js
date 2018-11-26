@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
+import style from "./App.less";
 
 /*
 Example of tweet object
@@ -21,9 +21,33 @@ _version_: 1618188225645379600
 
 class SearchResult extends Component {
 
+  flagStyle(city){
+    
+    switch (city[0]) {
+      case "mexico city": return style.mx_flag
+      case "nyc": return style.us_flag
+      case "bangkok": return style.th_flag
+      case "delhi": return style.in_flag
+      case "paris": return style.fr_flag
+    }
+  }
+
   render() {
-    const { text, lang, city } = this.props.result
-    return <div>{text}</div>;
+    const { text, lang, city, topic, tweet_date } = this.props.result
+
+
+
+    return <div className="col-md-4">
+            <div className="card mb-4 shadow-sm" >
+              <div className="card-body">
+                <p>{text}</p>
+                <div className="d-flex justify-content-between align-items-center">
+                    <small className="text-muted">{topic}</small>
+                    <span className={this.flagStyle(city)}/>
+                </div>
+              </div>
+            </div>
+            </div>;
   }
 }
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SearchResult from './SearchResult'
+import style from "./App.less";
 
 class ResultList extends Component {
 
@@ -10,7 +11,7 @@ class ResultList extends Component {
       return <SearchResult key={tweet.id} result={tweet} />
     });
 
-    return <div>{resultsComponent}</div>;
+    return <div className="row">{resultsComponent}</div>;
   }
 }
 

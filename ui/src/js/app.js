@@ -52,24 +52,27 @@ export default class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="jumbotron">
-            <input type="text"
-            className="form-control"
-            name="search"
-            value={this.state.search}
-            onKeyPress={this.handleKeyPress.bind(this)}
-            onChange={(e)=>this.setState({ search: e.target.value })}
-            placeholder={this.selectPlaceholder()}/>
-            <ResultList results={this.state.results} />
-            <Pagination itemClass="page-item"
-                    linkClass="page-link"
-                    activePage={this.state.activePage}
-                    itemsCountPerPage={this.itemsPerPage}
-                    totalItemsCount={this.state.numFound}
-                    pageRangeDisplayed={7}
-                    onChange={this.handlePageChange.bind(this)}
-                   />
-          </div>
+
+      <div className="row">
+        <input type="text"
+          className="form-control"
+          name="search"
+          value={this.state.search}
+          onKeyPress={this.handleKeyPress.bind(this)}
+          onChange={(e)=>this.setState({ search: e.target.value })}
+          placeholder={this.selectPlaceholder()}/>
+      </div>
+        <ResultList results={this.state.results} />
+
+        <Pagination itemClass="page-item"
+                linkClass="page-link"
+                activePage={this.state.activePage}
+                itemsCountPerPage={this.itemsPerPage}
+                totalItemsCount={this.state.numFound}
+                pageRangeDisplayed={7}
+                onChange={this.handlePageChange.bind(this)}
+               />
+
           <nav className="navbar fixed-bottom navbar-expand-sm navbar-dark bg-dark">
             <a className="navbar-brand" href="#">InfRet</a>
             <ul className="navbar-nav mr-auto">

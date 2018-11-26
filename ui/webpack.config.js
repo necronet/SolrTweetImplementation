@@ -32,6 +32,10 @@ module.exports = {
           'babel-loader',
         ],
       },
+      {
+        test: /\.svg$/,
+        use: "file-loader",
+      },
 
       {
       test: /\.less$/,
