@@ -6,6 +6,10 @@ import SolrService from './SolrService'
 import ResultList from './ResultList'
 import Pagination from "react-js-pagination";
 
+const Months = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"
+];
+
 const Bucket = ({results})=>{
   const bucketList = results.map((r,k)=>{
       return <li key={k} className="nav-item">
@@ -23,7 +27,7 @@ export default class App extends Component {
 
   constructor() {
     super()
-    this.state = { results:[], search:'mexico', activePage: 1, numFound:0, facets:[]}
+    this.state = { results:[], search:'mexico', activePage: 1, numFound:0, facets_lang:[],facets_date:[]}
     this.itemsPerPage = 10;
     this.solrService = new SolrService(this.itemsPerPage);
   }
@@ -35,10 +39,13 @@ export default class App extends Component {
   fetchData(start=0) {
     this.solrService.query(this.state.search, start, (res)=>{
 
+      const tdate_bucket = res.data.facets.tdate.buckets.map(r=>({val:Months[new Date(r.val).getMonth()],count:r.count}))
+
       this.setState({
         results:res.data.response.docs,
         numFound:res.data.response.numFound,
-        facets:res.data.facets.lang.buckets
+        facets_lang:res.data.facets.lang.buckets,
+        facets_date:tdate_bucket
       })
       }
     );
@@ -81,7 +88,10 @@ export default class App extends Component {
           placeholder={this.selectPlaceholder()}/>
       </div>
 
-        <Bucket results={this.state.facets}/>
+        <div className="row">
+          <div className="col-6"><Bucket results={this.state.facets_lang}/></div>
+          <div className="col-6"><Bucket results={this.state.facets_date}/></div>
+        </div>
 
         <ResultList results={this.state.results} />
 

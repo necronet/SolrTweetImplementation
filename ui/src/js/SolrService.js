@@ -5,7 +5,10 @@ class SolrService {
 
 
   constructor(itemPerPage) {
-    const defaultFacetParams = {lang:{field:'tweet_lang'}};
+    const defaultFacetParams = {
+                                lang:{field:'tweet_lang'},
+                                tdate:{field:'tweet_tdate',type:'range',start:'NOW/DAY-5MONTH',end:"NOW/DAY+5MONTH",gap:'+1MONTH',mincount:1}
+                                };
     this.config = {
         headers: {crossDomain: true},
         params:{json:{ limit:itemPerPage, query:"*:*", facet:defaultFacetParams}, wt:'json' }
