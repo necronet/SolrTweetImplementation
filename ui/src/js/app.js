@@ -6,11 +6,24 @@ import SolrService from './SolrService'
 import ResultList from './ResultList'
 import Pagination from "react-js-pagination";
 
+const Bucket = ({results})=>{
+  const bucketList = results.map((r,k)=>{
+      return <li key={k} className="nav-item">
+              <span className="nav-link badge badge-light">{r.val} ({r.count})</span>
+            </li>
+       });
+
+  return <ul className="nav">
+            {bucketList}
+          </ul>
+
+}
+
 export default class App extends Component {
 
   constructor() {
     super()
-    this.state = { results:[], search:'mexico', activePage: 1, numFound:0}
+    this.state = { results:[], search:'mexico', activePage: 1, numFound:0, facets:[]}
     this.itemsPerPage = 10;
     this.solrService = new SolrService(this.itemsPerPage);
   }
@@ -21,7 +34,12 @@ export default class App extends Component {
 
   fetchData(start=0) {
     this.solrService.query(this.state.search, start, (res)=>{
-      this.setState({results:res.data.response.docs, numFound:res.data.response.numFound})
+
+      this.setState({
+        results:res.data.response.docs,
+        numFound:res.data.response.numFound,
+        facets:res.data.facets.lang.buckets
+      })
       }
     );
 
@@ -62,6 +80,9 @@ export default class App extends Component {
           onChange={(e)=>this.setState({ search: e.target.value })}
           placeholder={this.selectPlaceholder()}/>
       </div>
+
+        <Bucket results={this.state.facets}/>
+
         <ResultList results={this.state.results} />
 
         <Pagination itemClass="page-item"

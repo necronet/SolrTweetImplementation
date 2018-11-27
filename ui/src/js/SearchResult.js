@@ -22,7 +22,7 @@ _version_: 1618188225645379600
 class SearchResult extends Component {
 
   flagStyle(city){
-    
+
     switch (city[0]) {
       case "mexico city": return style.mx_flag
       case "nyc": return style.us_flag
@@ -33,7 +33,7 @@ class SearchResult extends Component {
   }
 
   render() {
-    const { text, lang, city, topic, tweet_date } = this.props.result
+    const { text, tweet_lang, city, topic, tweet_date } = this.props.result
 
 
 
