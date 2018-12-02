@@ -15,10 +15,23 @@ class SolrService {
     };
   }
 
-  query(search, start, successFn) {
+  queryMap(successFn) {
+    const mapConfig = {
+        headers: {crossDomain: true},
+        params:{json:{ limit:50, query:"*:*", filter:'tweet_loc:[-90,-180 TO 90,180]'},
+        wt:'json'}
+    };
+    axios.get(SOLR_SERVER,mapConfig).then(successFn)
+  }
+
+  query(search, start, filter, successFn) {
 
     if(search){
       this.config.params.json.query=search;
+
+      if(filter)
+        this.config.params.json.filter=filter;
+
       this.config.params.json.offset=(start*this.config.params.json.limit);
       axios.get(SOLR_SERVER,this.config)
       .then(successFn)

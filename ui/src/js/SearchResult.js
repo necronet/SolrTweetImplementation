@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import style from "./App.less";
+import Linkify from 'react-linkify';
 
 /*
 Example of tweet object
@@ -32,15 +33,32 @@ class SearchResult extends Component {
     }
   }
 
+
+  getHighlightHashtags(text) {
+    const HashtagRegex = /\B(\#[a-zA-Z]+\b)(?!;)/
+    let parts = text.split(new RegExp(HashtagRegex, 'gm'))
+
+    return <span> { parts.map((part, i) =>
+        <span key={i} className={ HashtagRegex.test(part)? style.hashtag : ""}>
+            { part }
+        </span>)
+    } </span>;
+  }
+
   render() {
     const { text, tweet_lang, city, topic, tweet_date } = this.props.result
 
 
+    /*const urls = twitter_text.extractUrls(text[0]);
+    let tweet_image = false;
+    if(urls.length > 0) {
+      tweet_image = urls[0];
+    }*/
 
-    return <div className="col-md-4">
+    return <div className="col-md-4 d-flex align-items-stretch">
             <div className="card mb-4 shadow-sm" >
               <div className="card-body">
-                <p>{text}</p>
+                <Linkify>{this.getHighlightHashtags(text[0])}</Linkify>
                 <div className="d-flex justify-content-between align-items-center">
                     <small className="text-muted">{topic}</small>
                     <span className={this.flagStyle(city)}/>
