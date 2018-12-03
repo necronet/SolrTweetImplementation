@@ -64,8 +64,15 @@ export default class App extends Component {
 
       const tdate_bucket = res.data.facets.tdate.buckets.map(r=>({val:Months[new Date(r.val).getMonth()],count:r.count}))
 
+      const results = res.data.response.docs.map((r,i)=>{
+          r.tweet_text = res.data.highlighting[r.id].tweet_text;
+          return r;
+      });
+
+      //console.log(results);
+
       this.setState({
-        results:res.data.response.docs,
+        results:results,
         numFound:res.data.response.numFound,
         facets_lang:res.data.facets.lang.buckets,
         facets_date:tdate_bucket
@@ -73,7 +80,7 @@ export default class App extends Component {
       }
     );
 
-    this.solrService.queryMap((res)=>{
+    this.solrService.queryMap(this.state.search,(res)=>{
       this.setState({
         geo_results:res.data.response.docs
       });
@@ -85,7 +92,6 @@ export default class App extends Component {
     if (e.key === 'Enter') {
       this.fetchData();
     }
-
   }
 
   selectPlaceholder() {

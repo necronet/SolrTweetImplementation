@@ -46,19 +46,12 @@ class SearchResult extends Component {
   }
 
   render() {
-    const { text, tweet_lang, city, topic, tweet_date } = this.props.result
-
-
-    /*const urls = twitter_text.extractUrls(text[0]);
-    let tweet_image = false;
-    if(urls.length > 0) {
-      tweet_image = urls[0];
-    }*/
-
+    const { text, tweet_text, tweet_lang, city, topic, tweet_date } = this.props.result
+    console.log(tweet_text)
     return <div className="col-md-4 d-flex align-items-stretch">
             <div className="card mb-4 shadow-sm" >
               <div className="card-body">
-                <Linkify>{this.getHighlightHashtags(text[0])}</Linkify>
+                <Linkify>{this.getHighlightHashtags(tweet_text[0])}</Linkify>
                 <div className="d-flex justify-content-between align-items-center">
                     <small className="text-muted">{topic}</small>
                     <span className={this.flagStyle(city)}/>

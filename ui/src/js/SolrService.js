@@ -11,14 +11,23 @@ class SolrService {
                                 };
     this.config = {
         headers: {crossDomain: true},
-        params:{json:{ limit:itemPerPage, query:"*:*", facet:defaultFacetParams}, wt:'json' }
+        params:{
+          json:{
+            limit:itemPerPage,
+            query:"*:*",
+            facet:defaultFacetParams
+          },
+          wt:'json',
+          hl:'on'
+          }
     };
+    this.config.params['hl.method'] = 'unified'
   }
 
-  queryMap(successFn) {
+  queryMap(search, successFn) {
     const mapConfig = {
         headers: {crossDomain: true},
-        params:{json:{ limit:50, query:"*:*", filter:'tweet_loc:[-90,-180 TO 90,180]'},
+        params:{json:{ limit:50, query:search, filter:'tweet_loc:[-90,-180 TO 90,180]'},
         wt:'json'}
     };
     axios.get(SOLR_SERVER,mapConfig).then(successFn)
