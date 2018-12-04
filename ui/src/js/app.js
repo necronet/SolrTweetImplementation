@@ -52,7 +52,7 @@ export default class App extends Component {
       results:[],
       fetching:false,
       geo_results:[],
-      search:'New york city',
+      search:'',
       activePage: 1,
       numFound:0,
       visible_more_like_this:false,
@@ -169,7 +169,7 @@ export default class App extends Component {
 
       { locationMarkers.length > 0 &&
       <MapWithAMarker
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=&v=3.exp&libraries=geometry,drawing,places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJxUyqBQTqyDiJsmR64LbYlHAJJpdyh4E&v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `220px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
