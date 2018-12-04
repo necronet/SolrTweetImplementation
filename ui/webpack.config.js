@@ -78,6 +78,16 @@ module.exports = {
          pathRewrite: {
             '^/search': ''
          }
+      },
+      '/summarize': {
+         target: {
+            host: "0.0.0.0",
+            protocol: 'http:',
+            port: 5000
+         },
+         pathRewrite: {
+            '^/summarize': 'summarize'
+         }
       }
    }
   },
