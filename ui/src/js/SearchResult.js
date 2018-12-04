@@ -33,6 +33,15 @@ class SearchResult extends Component {
     }
   }
 
+  sentiment(sentiment){
+
+    switch (sentiment) {
+      case "positive": return style.positive
+      case "negative": return style.negative
+      case "neutral": return style.neutral
+    }
+  }
+
 
   getHighlightHashtags(text) {
     const HashtagRegex = /\B(\#[a-zA-Z]+\b)(?!;)/
@@ -45,16 +54,30 @@ class SearchResult extends Component {
     } </span>;
   }
 
+  moreLikeThis(e) {
+    e.preventDefault();
+    this.props.onClickMore(this.props.moreLikeThis);
+  }
+
   render() {
-    const { text, tweet_text, tweet_lang, city, topic, tweet_date } = this.props.result
-    console.log(tweet_text)
-    return <div className="col-md-4 d-flex align-items-stretch">
-            <div className="card mb-4 shadow-sm" >
+    const { text, tweet_text, tweet_lang, city, topic, tweet_date } = this.props.result;
+
+    let showMoreLikeThis = false;
+    if(this.props.moreLikeThis)
+      showMoreLikeThis = this.props.moreLikeThis.numFound>0;
+
+    return <div className="col-md-6 d-flex align-items-stretch mt-3">
+            <div className="card mb-6 shadow-sm" >
+            <span className={this.flagStyle(city)}/>
               <div className="card-body">
-                <Linkify>{this.getHighlightHashtags(tweet_text[0])}</Linkify>
+                <Linkify>
+                  <div dangerouslySetInnerHTML={{__html:tweet_text[0]}} />
+                </Linkify>
                 <div className="d-flex justify-content-between align-items-center">
                     <small className="text-muted">{topic}</small>
-                    <span className={this.flagStyle(city)}/>
+                    {showMoreLikeThis && <a href="#" onClick={this.moreLikeThis.bind(this)} className="card-link">See more</a >}
+
+                    <span className={this.sentiment("neutral")}/>
                 </div>
               </div>
             </div>
@@ -63,7 +86,8 @@ class SearchResult extends Component {
 }
 
 SearchResult.propTypes = {
-  result: PropTypes.object
+  result: PropTypes.object,
+  moreLikeThis: PropTypes.object
 };
 
 export default SearchResult;

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import sw from 'stopword'
 import { SOLR_SERVER } from './constants'
 
 class SolrService {
@@ -18,10 +19,16 @@ class SolrService {
             facet:defaultFacetParams
           },
           wt:'json',
-          hl:'on'
+          hl:'on',
+          mlt:true
           }
     };
-    this.config.params['hl.method'] = 'unified'
+    this.config.params['hl.method'] = 'unified';
+    this.config.params['mlt.fl']="text_en,text_fr:text_es";
+    this.config.params['mlt.mindf']=2;
+    this.config.params['mlt.mintf']=2;
+    this.config.params['mlt.count']=4;
+
   }
 
   queryMap(search, successFn) {
@@ -37,7 +44,8 @@ class SolrService {
 
     if(search){
       this.config.params.json.query=search;
-
+      this.config.params['hl.q']=sw.removeStopwords(search.split(' ')).join(' ');
+      //console.log(sw.removeStopwords(search.split(' ')).join(' '));
       if(filter)
         this.config.params.json.filter=filter;
 
@@ -46,7 +54,7 @@ class SolrService {
       .then(successFn)
     } else {
       //if empty we should get trending tweets
-      console.log("try to get trending")
+      //console.log("try to get trending")
     }
   }
 

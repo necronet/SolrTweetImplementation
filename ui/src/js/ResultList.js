@@ -8,15 +8,23 @@ class ResultList extends Component {
   render() {
 
     const resultsComponent = this.props.results.map(tweet=>{
-      return <SearchResult key={tweet.id} result={tweet} />
+      let moreLikeThis;
+      if(this.props.moreLikeThis){
+        moreLikeThis = this.props.moreLikeThis[tweet.id];
+      }
+      
+      return <SearchResult key={tweet.id} result={tweet}
+              moreLikeThis={moreLikeThis}
+              onClickMore={this.props.onClick}/>
     });
 
-    return <div className="row">{resultsComponent}</div>;
+    return <React.Fragment>{resultsComponent}</React.Fragment>;
   }
 }
 
 ResultList.propTypes = {
-  results: PropTypes.array.isRequired
+  results: PropTypes.array.isRequired,
+  onClick: PropTypes.func.isRequired
 };
 
 export default ResultList;
