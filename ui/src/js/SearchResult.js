@@ -60,12 +60,13 @@ class SearchResult extends Component {
   }
 
   render() {
-    const { text, tweet_text, tweet_lang, city, topic, tweet_date } = this.props.result;
+    const { text, tweet_text, tweet_lang, city, topic, tweet_date, sentiment } = this.props.result;
 
     let showMoreLikeThis = false;
     if(this.props.moreLikeThis)
       showMoreLikeThis = this.props.moreLikeThis.numFound>0;
 
+    //console.log(sentiment)
     return <div className="col-md-6 d-flex align-items-stretch mt-3">
             <div className="card mb-6 shadow-sm" >
             <span className={this.flagStyle(city)}/>
@@ -77,7 +78,7 @@ class SearchResult extends Component {
                     <small className="text-muted">{topic}</small>
                     {showMoreLikeThis && <a href="#" onClick={this.moreLikeThis.bind(this)} className="card-link">See more</a >}
 
-                    <span className={this.sentiment("neutral")}/>
+                    <span className={this.sentiment(sentiment[0])}/>
                 </div>
               </div>
             </div>

@@ -19,7 +19,7 @@ const Credit = ({visible, onClick}) =>{
              </p>
        </div>
      </div>
-      <div class="form-group col-12">
+      <div className="form-group col-12">
         <hr/>
       </div>
       <div className="col-md-12">
@@ -34,7 +34,7 @@ const Credit = ({visible, onClick}) =>{
               </p>
         </div>
       </div>
-      <div class="form-group col-12">
+      <div className="form-group col-12">
         <hr/>
       </div>
       <div className="col-md-12">

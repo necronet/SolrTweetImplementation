@@ -24,7 +24,7 @@ class SolrService {
           }
     };
     this.config.params['hl.method'] = 'unified';
-    this.config.params['mlt.fl']="text_en,text_fr:text_es";
+    this.config.params['mlt.fl']="text_en,text_fr,text_es";
     this.config.params['mlt.mindf']=2;
     this.config.params['mlt.mintf']=2;
     this.config.params['mlt.count']=4;
