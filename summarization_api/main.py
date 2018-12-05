@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import request
-import urllib.request
 import os
 import json
 from newspaper import Article
