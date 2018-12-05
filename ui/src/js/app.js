@@ -99,11 +99,13 @@ export default class App extends Component {
       }
     );
 
-    this.solrService.queryMap(this.state.search,(res)=>{
-      this.setState({
-        geo_results:res.data.response.docs
+
+    if(this.state.search.length > 0)
+      this.solrService.queryMap(this.state.search,(res)=>{
+        this.setState({
+          geo_results:res.data.response.docs
+        });
       });
-    })
 
   }
 
