@@ -12,13 +12,14 @@ import Pagination from "react-js-pagination";
 import Loader from 'react-loader-spinner'
 import Modal from 'react-bootstrap4-modal';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
-//import { ITEMS_PER_PAGE} from './constants'
+import { ITEMS_PER_PAGE} from './constants'
 
-let ITEMS_PER_PAGE;
-
-if(process.env.NODE_ENV == "development")
-  ITEMS_PER_PAGE = require('./constants').ITEMS_PER_PAGE;
-
+// let ITEMS_PER_PAGE;
+//
+// if(process.env.NODE_ENV == "development")
+//   ITEMS_PER_PAGE = require('./constants').ITEMS_PER_PAGE;
+// else
+//   ITEMS_PER_PAGE = require('./constants.production.js').ITEMS_PER_PAGE;
 
 
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>{

@@ -1,10 +1,10 @@
 import axios from 'axios';
 import sw from 'stopword'
+import { SOLR_SERVER } from './constants'
+// let SOLR_SERVER;
+// if(process.env.NODE_ENV == "development")
+//   SOLR_SERVER = require('./constants').SOLR_SERVER;
 
-let SOLR_SERVER;
-if(process.env.NODE_ENV == "development")
-  SOLR_SERVER = require('./constants').SOLR_SERVER;
-//import { SOLR_SERVER } from './constants'
 
 class SolrService {
 
