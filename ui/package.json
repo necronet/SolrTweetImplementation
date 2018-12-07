@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=development webpack-dev-server --mode development",
+    "start:dev": "NODE_ENV=development webpack-dev-server --mode development",
+    "start:prod": "NODE_ENV=production webpack-dev-server --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=development webpack --mode development"
+    "build:dev": "NODE_ENV=development webpack --mode development",
+    "build:prod": "NODE_ENV=production webpack --mode production"
   },
   "author": "",
   "license": "ISC",

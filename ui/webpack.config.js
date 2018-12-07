@@ -87,14 +87,14 @@ module.exports = {
             '^/search': ''
          }
       },
-      '/summarize': {
+      '/summarization/summarize': {
          target: {
             host: "0.0.0.0",
             protocol: 'http:',
             port: 5000
          },
          pathRewrite: {
-            '^/summarize': 'summarize'
+            '^/summarization/summarize': 'summarization/summarize'
          }
       }
    }
