@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { SUMMARIZE_SERVER } from './constants'
+//import { SUMMARIZE_SERVER } from './constants'
+
+let SUMMARIZE_SERVER;
+if(process.env.NODE_ENV == "development")
+  SUMMARIZE_SERVER = require('./constants').SUMMARIZE_SERVER;
 
 class SummarizeService {
 

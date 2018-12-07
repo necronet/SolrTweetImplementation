@@ -67,17 +67,17 @@ class TopHeader extends React.Component {
     const onClick = ()=>this.setState({visible:!this.state.visible});
 
     return <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-              <span className="navbar-brand mb-0 h1">InfRet</span>
+              <span className="navbar-brand mb-0 h1">InfoRet</span>
               <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item active">
                   <a className="nav-link" href="#">Demo<span className="sr-only">(current)</span></a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="https://github.com/necronet/IR-project4/">Source code</a>
+                  <a className="nav-link" href="https://github.com/necronet/IR-project4/"  target="_blank">Source code</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link disabled" href="#">Video</a>
+                  <a className="nav-link" href="https://www.youtube.com/watch?v=veH42gPllnU&feature=youtu.be"  target="_blank">Video</a>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="#" onClick={onClick}>Credit</a>

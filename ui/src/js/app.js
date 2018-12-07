@@ -9,10 +9,17 @@ import ResultList from './ResultList'
 import TopHeader from './TopHeader'
 import MoreLikeThisModal from './MoreLikeThisModal'
 import Pagination from "react-js-pagination";
-import { ITEMS_PER_PAGE} from './constants'
 import Loader from 'react-loader-spinner'
 import Modal from 'react-bootstrap4-modal';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+//import { ITEMS_PER_PAGE} from './constants'
+
+let ITEMS_PER_PAGE;
+
+if(process.env.NODE_ENV == "development")
+  ITEMS_PER_PAGE = require('./constants').ITEMS_PER_PAGE;
+
+
 
 const MapWithAMarker = withScriptjs(withGoogleMap(props =>{
 
@@ -68,37 +75,39 @@ export default class App extends Component {
   }
 
   fetchData(filter=null) {
-    this.setState({fetching:true});
-    this.solrService.query(this.state.search, (this.state.activePage-1), filter, (res)=>{
+    if(this.state.search.length > 0) {
+      this.setState({fetching:true});
+
+      this.solrService.query(this.state.search, (this.state.activePage-1), filter, (res)=>{
 
 
-      let tdate_bucket = [];
-      let facets_lang = [];
-      if(res.data.facets.count > 0) {
-        tdate_bucket = res.data.facets.tdate.buckets.map(r=>({val:Months[new Date(r.val).getMonth()],count:r.count}));
-        facets_lang = res.data.facets.lang.buckets;
-      }
+        let tdate_bucket = [];
+        let facets_lang = [];
+        if(res.data.facets.count > 0) {
+          tdate_bucket = res.data.facets.tdate.buckets.map(r=>({val:Months[new Date(r.val).getMonth()],count:r.count}));
+          facets_lang = res.data.facets.lang.buckets;
+        }
 
-      const results = res.data.response.docs.map((r,i)=>{
-          r.tweet_text = res.data.highlighting[r.id].tweet_text;
-          return r;
-      });
+        const results = res.data.response.docs.map((r,i)=>{
+            r.tweet_text = res.data.highlighting[r.id].tweet_text;
+            return r;
+        });
 
-      let moreLikeThis = [];
-      if(res.data.moreLikeThis)
-        moreLikeThis = res.data.moreLikeThis;
+        let moreLikeThis = [];
+        if(res.data.moreLikeThis)
+          moreLikeThis = res.data.moreLikeThis;
 
-      this.setState({
-        fetching:false,
-        results:results,
-        numFound:res.data.response.numFound,
-        facets_lang:facets_lang,
-        facets_date:tdate_bucket,
-        moreLikeThis:moreLikeThis
-      })
-      }
-    );
-
+        this.setState({
+          fetching:false,
+          results:results,
+          numFound:res.data.response.numFound,
+          facets_lang:facets_lang,
+          facets_date:tdate_bucket,
+          moreLikeThis:moreLikeThis
+        })
+        }
+      );
+    }
 
     if(this.state.search.length > 0)
       this.solrService.queryMap(this.state.search,(res)=>{
@@ -171,7 +180,7 @@ export default class App extends Component {
 
       { locationMarkers.length > 0 &&
       <MapWithAMarker
-        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJxUyqBQTqyDiJsmR64LbYlHAJJpdyh4E&v=3.exp&libraries=geometry,drawing,places"
+        googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAd8kTyA8MODgqoqZVIO2KwWXdLMqoXqQ&v=3.exp&libraries=geometry,drawing,places"
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `220px` }} />}
         mapElement={<div style={{ height: `100%` }} />}
