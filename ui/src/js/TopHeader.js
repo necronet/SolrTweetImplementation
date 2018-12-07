@@ -9,13 +9,12 @@ const Credit = ({visible, onClick}) =>{
      <div className="row">
      <div className="col-md-12">
        <div className="card-body d-flex flex-column align-items-start">
-             <strong className="d-inline-block mb-2 text-primary">UI + Facetting </strong>
+             <strong className="d-inline-block mb-1 text-primary">UI + Facetting </strong>
              <h3 className="mb-0">
                <a className="text-dark" href="http://github.com/necronet/">Jose Luis Ayerdis Espinoza</a>
              </h3>
              <p className="card-text mb-auto">
-               Implemented Facet and internally optimize querying including the use of difference similarity techniques. Also implementation of the UI archiquitecture
-               and communication with Solr.
+               Facet, query optimization with similarity techniques, UI archiquitecture and communication with Solr and deployment,
              </p>
        </div>
      </div>
@@ -24,13 +23,12 @@ const Credit = ({visible, onClick}) =>{
       </div>
       <div className="col-md-12">
         <div className="card-body d-flex flex-column align-items-start">
-              <strong className="d-inline-block mb-2 text-success">Sentiment Analysis and Reporting</strong>
+              <strong className="d-inline-block mb-1 text-success">Sentiment Analysis + Reporting</strong>
               <h3 className="mb-0">
                 <a className="text-dark" href="#">Ayush Limaye</a>
               </h3>
               <p className="card-text mb-auto">
-                In charge of applying <strong>sentiment analysis</strong> techniques into the dataset, as well as finishing details
-                of video and report details.
+                Implemented <strong>sentiment analysis</strong> techniques into the dataset, video, reporting and filtering of data.
               </p>
         </div>
       </div>
@@ -39,12 +37,12 @@ const Credit = ({visible, onClick}) =>{
       </div>
       <div className="col-md-12">
         <div className="card-body d-flex flex-column align-items-start">
-              <strong className="d-inline-block mb-2 text-danger">Summarization and Translation</strong>
+              <strong className="d-inline-block mb-1 text-danger">Summarization + Translation</strong>
               <h3 className="mb-0">
                 <a className="text-dark" href="#">Satya Chaitanya Chembolu</a>
               </h3>
               <p className="card-text mb-auto">
-                Implement and showcase different highlighting techniques and summarization method in solr.
+                Implement and showcase different <strong>highlighting</strong> techniques and <strong>summarization</strong> methods.
                 As well as implementing the translation routines that were ultimately expose as an external API.
               </p>
         </div>

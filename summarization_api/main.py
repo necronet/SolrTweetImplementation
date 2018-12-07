@@ -48,7 +48,7 @@ def summarize_translate(data, limit=1):
 @app.route('/summarization/summarize', methods=['POST'])
 def summarization_translation():
     data = request.get_json()
-    summary = summarize_translate(data,2)
+    summary = summarize_translate(data,5)
     return summary
 
 
