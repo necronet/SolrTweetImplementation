@@ -8,6 +8,7 @@ import SummaryTranslation from './SummaryTranslation'
 import ResultList from './ResultList'
 import TopHeader from './TopHeader'
 import MoreLikeThisModal from './MoreLikeThisModal'
+import AnalyticsDialog from './AnalyticsDialog'
 import Pagination from "react-js-pagination";
 import Loader from 'react-loader-spinner'
 import Modal from 'react-bootstrap4-modal';
@@ -60,10 +61,11 @@ export default class App extends Component {
       results:[],
       fetching:false,
       geo_results:[],
-      search:'',
+      search:'Protestas en Mexico',
       activePage: 1,
       numFound:0,
       visible_more_like_this:false,
+      analytics_visible:false,
       docs:{},
       facets_lang:[],
       facets_date:[],
@@ -150,8 +152,17 @@ export default class App extends Component {
     this.setState({visible_more_like_this:!this.state.visible_more_like_this, docs:docs})
   }
 
-  render() {
+  onClickAnalytics() {
+    this.setState({analytics_visible:!this.state.analytics_visible});
+  }
 
+  render() {
+      /*
+
+      <div className="col-4">
+        {this.state.results.length > 0 && <Analytics results={data} langs={this.state.facets_lang}/> }
+      </div>
+      */
     const locationMarkers = this.state.geo_results.map(
             r=>({lat:parseFloat(r.tweet_loc.split(",")[0]),lng:parseFloat(r.tweet_loc.split(",")[1])})
           );
@@ -162,7 +173,11 @@ export default class App extends Component {
           docs={this.state.docs}
           onClickMore={this.onClickMore.bind(this)}/>
 
-      <TopHeader/>
+      { this.state.analytics_visible && <AnalyticsDialog visible={this.state.analytics_visible}
+          langs={this.state.facets_lang}
+          onClickMore={this.onClickAnalytics.bind(this)}/>}
+
+      <TopHeader displayAnalytics={this.state.results.length > 0} showAnalytics={this.onClickAnalytics.bind(this)}/>
 
       <div className="container-fluid">
 
@@ -176,9 +191,11 @@ export default class App extends Component {
             onChange={(e)=>this.setState({ search: e.target.value })}
             placeholder={this.selectPlaceholder()}/>
           </div>
+
       </div>
 
-
+      <div className="row">
+      <div className="col-12">
       { locationMarkers.length > 0 &&
       <MapWithAMarker
         googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyBAd8kTyA8MODgqoqZVIO2KwWXdLMqoXqQ&v=3.exp&libraries=geometry,drawing,places"
@@ -188,6 +205,9 @@ export default class App extends Component {
         markers={locationMarkers}
         />
       }
+      </div>
+
+      </div>
 
       {this.state.results.length > 0 &&
         <div className="row">

@@ -85,6 +85,10 @@ class TopHeader extends React.Component {
               </ul>
               </div>
               <Credit visible={this.state.visible} onClick={onClick}/>
+              { this.props.displayAnalytics && <div className="form-inline">
+                <button className="btn btn-info" type="submit" onClick={this.props.showAnalytics}>Analytics</button>
+              </div>
+              }
             </nav>;
 
           }

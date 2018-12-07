@@ -11,15 +11,7 @@ class MoreLikeThisModal extends React.Component {
       moreLikeThisDocs = <div className="row"><ResultList
                             results={this.props.docs.docs}
                             onClick={()=>{}} /></div>
-      // moreLikeThisDocs = this.props.docs.docs.map(d=> {
-      //     return <ul key={d.id} className="list-group">
-      //               <li className="list-group-item d-flex justify-content-between align-items-center">
-      //               {d.tweet_text}
-      //               </li>
-      //            </ul>
-      //});
     }
-
     return <Modal visible={this.props.visible} onClickBackdrop={this.props.onClickMore}>
      <div className="modal-header">
        <h5 className="modal-title">More like this</h5>
