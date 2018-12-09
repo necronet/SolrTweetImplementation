@@ -69,6 +69,7 @@ export default class App extends Component {
       docs:{},
       facets_lang:[],
       facets_date:[],
+      facets_topic:[],
       moreLikeThis:[]}
     this.solrService = new SolrService(ITEMS_PER_PAGE);
   }
@@ -86,9 +87,11 @@ export default class App extends Component {
 
         let tdate_bucket = [];
         let facets_lang = [];
+        let facets_topic = [];
         if(res.data.facets.count > 0) {
           tdate_bucket = res.data.facets.tdate.buckets.map(r=>({val:Months[new Date(r.val).getMonth()],count:r.count}));
           facets_lang = res.data.facets.lang.buckets;
+          facets_topic = res.data.facets.topic.buckets;
         }
 
         const results = res.data.response.docs.map((r,i)=>{
@@ -106,7 +109,8 @@ export default class App extends Component {
           numFound:res.data.response.numFound,
           facets_lang:facets_lang,
           facets_date:tdate_bucket,
-          moreLikeThis:moreLikeThis
+          moreLikeThis:moreLikeThis,
+          facets_topic:facets_topic
         })
         }
       );
@@ -175,6 +179,7 @@ export default class App extends Component {
 
       { this.state.analytics_visible && <AnalyticsDialog visible={this.state.analytics_visible}
           langs={this.state.facets_lang}
+          topics={this.state.facets_topic}
           onClickMore={this.onClickAnalytics.bind(this)}/>}
 
       <TopHeader displayAnalytics={this.state.results.length > 0} showAnalytics={this.onClickAnalytics.bind(this)}/>

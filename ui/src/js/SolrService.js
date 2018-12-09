@@ -12,6 +12,7 @@ class SolrService {
   constructor(itemPerPage) {
     const defaultFacetParams = {
                                 lang:{field:'tweet_lang'},
+                                topic:{field:'topic'},
                                 tdate:{field:'tweet_tdate',type:'range',start:'NOW/DAY-5MONTH',end:"NOW/DAY+5MONTH",gap:'+1MONTH',mincount:1}
                                 };
     this.config = {

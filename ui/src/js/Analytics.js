@@ -8,13 +8,13 @@ const dynamicColors = () => {
             return "rgb(" + r + "," + g + "," + b + ")";
          };
 
-const Analytics = ({langs}) => {
+const Analytics = ({results}) => {
 
   const colors = ["#F7464A","#46BFBD","#FDB45C","#949FB1","#4D5360","#761CFF"]
   const highlights = ["#FF5A5E","#5AD3D1","#FFC870","#A8B3C5","#616774","#8C40FF"]
 
   const options = {animateScale:false,animateRotate:false}
-  const data = langs.reduce((acc,val,i)=>{
+  const data = results.reduce((acc,val,i)=>{
     acc.push({value:val.count, label:val.val,color:colors[i],highlights:highlights[i]});
     return acc;
   },[]);
