@@ -17,3 +17,7 @@
 
 A simple ReactJS frontend application that allows to query information using [JSON Request API](https://lucene.apache.org/solr/guide/7_1/json-request-api.html), retrieving information regarding
 consolidated data and relevant result.
+
+## Showcase
+
+Application had been deployed in AWS for showcasing purposes. [InfoRet](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
