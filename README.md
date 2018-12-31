@@ -20,4 +20,4 @@ consolidated data and relevant result.
 
 ## Showcase
 
-Application had been deployed in AWS for showcasing purposes. [InfoRet](ec2-18-220-247-121.us-east-2.compute.amazonaws.com)
+Application had been deployed in AWS for showcasing purposes. [InfoRet](http://ec2-18-220-247-121.us-east-2.compute.amazonaws.com/inforet/)
