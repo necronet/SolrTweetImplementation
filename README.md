@@ -20,4 +20,4 @@ consolidated data and relevant result.
 
 ## Showcase
 
-Application had been deployed in AWS for showcasing purposes. [InfoRet](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#Instances:sort=instanceId)
+Application had been deployed in AWS for showcasing purposes. [InfoRet](ec2-18-220-247-121.us-east-2.compute.amazonaws.com)
