@@ -152,7 +152,7 @@ pyLDAvis==2.1.1
 pylint==1.7.4
 PyMySQL==0.8.0
 pyodbc==4.0.17
-pyOpenSSL==17.2.0
+pyOpenSSL==17.5.0
 pyparsing==2.2.0
 PySocks==1.6.7
 pytest==3.2.1
