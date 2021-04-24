@@ -147,7 +147,7 @@ pycrypto==2.6.1
 pycurl==7.43.0
 PyDispatcher==2.0.5
 pyflakes==1.6.0
-Pygments==2.2.0
+Pygments==2.7.4
 pyLDAvis==2.1.1
 pylint==1.7.4
 PyMySQL==0.8.0
